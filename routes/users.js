@@ -1,5 +1,5 @@
 const express = require('express');
-const { check, validationResult } = require('express-validator');
+const {check, validationResult} = require('express-validator');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const config = require('config');
@@ -16,6 +16,10 @@ router.post('/', [
     check('email', 'Please, include a valid email').isEmail(),
     check('password', 'Password should be min 6 and max 22 characters').isLength({min: 6, max: 22})
 ], async(req, res) => {
+
+    const errors = validationResult(req);
+    if(!errors.isEmpty()) res.status(400).json({errors: errors.array()});
+
     const {name, email, password} = req.body;
 
     try {
@@ -37,11 +41,13 @@ router.post('/', [
             }
         };
 
+        await user.save();
+
         jwt.sign(payload, config.get('jwtSecret'), {
             expiresIn: 36000
         }, (err, token) => {
             if(err) throw err;
-            res.send({token})
+            res.json({token})
         });
     } catch(err) {
         console.log(err);
