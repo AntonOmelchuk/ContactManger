@@ -32,6 +32,10 @@ a:hover {
   color: #666;
 }
 
+input:hover {
+  cursor: pointer;
+}
+
 ul {
   list-style: none;
 }
