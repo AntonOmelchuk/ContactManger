@@ -3,7 +3,7 @@ import {Switch, Route, BrowserRouter} from 'react-router-dom';
 import Navbar from "./components/layouts/Navbar";
 import Home from "./components/pages/Home";
 import About from "./components/pages/About";
-import ContactState from "./context/contact/ContactState";
+import {ContactState} from "./context/contacts/ContactState";
 
 const App = () => {
     return (
@@ -20,7 +20,6 @@ const App = () => {
                 </>
             </BrowserRouter>
         </ContactState>
-
     );
 };
 
