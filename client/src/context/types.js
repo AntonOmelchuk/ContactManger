@@ -3,3 +3,7 @@ export const DELETE_CONTACT = 'DELETE_CONTACT';
 export const SET_CURRENT = 'SET_CURRENT';
 export const CLEAR_CURRENT = 'CLEAR_CURRENT';
 export const UPDATE_CONTACT = 'UPDATE_CONTACT';
+export const SET_FILTER = 'SET_FILTER';
+export const CLEAT_FILTER = 'CLEAT_FILTER';
+export const SET_ALERT = 'SET_ALERT';
+export const CLEAR_ALERT = 'CLEAR_ALERT';
