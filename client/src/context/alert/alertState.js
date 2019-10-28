@@ -13,7 +13,7 @@ const AlertState = (props) => {
     const setAlert = (type, msg, timeout = 3000) => {
 
         if(state.length > 0) return;
-        
+
         const id = uuid.v4();
         dispatch({
             type: SET_ALERT,

@@ -7,3 +7,6 @@ export const SET_FILTER = 'SET_FILTER';
 export const CLEAT_FILTER = 'CLEAT_FILTER';
 export const SET_ALERT = 'SET_ALERT';
 export const CLEAR_ALERT = 'CLEAR_ALERT';
+export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
+export const REGISTER_ERROR = 'REGISTER_ERROR';
+export const CLEAR_ERRORS = 'CLEAR_ERRORS';
