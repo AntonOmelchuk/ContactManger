@@ -9,10 +9,10 @@ import {
     CLEAR_CURRENT,
     UPDATE_CONTACT,
     SET_FILTER,
-    CLEAT_FILTER,
+    CLEAR_FILTER,
     CONTACT_ERROR,
     GET_CONTACTS,
-    SET_LOADING
+    CLEAR_CONTACTS
 } from '../types';
 
 const ContactState = props => {
@@ -61,14 +61,15 @@ const ContactState = props => {
         }
     };
 
-    const deleteContact = async _id => {
-
+    const deleteContact = async id => {
+        debugger
         try {
-            await axios.delete(`/api/contacts/${_id}`);
-
+            const response  = await axios.delete(`/api/contacts/${id}`);
+            debugger
+            console.log(response)
             dispatch({
                 type: DELETE_CONTACT,
-                payload: _id
+                payload: id
             });
         } catch(err) {
             dispatch({
@@ -86,7 +87,9 @@ const ContactState = props => {
 
     const setFilter = text => dispatch({type: SET_FILTER, payload: text});
 
-    const clearFilter = () => dispatch({type: CLEAT_FILTER});
+    const clearFilter = () => dispatch({type: CLEAR_FILTER});
+
+    const clearContacts = () => dispatch({type: CLEAR_CONTACTS});
 
     return (
         <ContactContext.Provider
@@ -103,7 +106,8 @@ const ContactState = props => {
             updateContact,
             setFilter,
             clearFilter,
-            getContacts
+            getContacts,
+            clearContacts
         }}>
             {props.children}
         </ContactContext.Provider>

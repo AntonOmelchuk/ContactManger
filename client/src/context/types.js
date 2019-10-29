@@ -4,7 +4,7 @@ export const SET_CURRENT = 'SET_CURRENT';
 export const CLEAR_CURRENT = 'CLEAR_CURRENT';
 export const UPDATE_CONTACT = 'UPDATE_CONTACT';
 export const SET_FILTER = 'SET_FILTER';
-export const CLEAT_FILTER = 'CLEAT_FILTER';
+export const CLEAR_FILTER = 'CLEAT_FILTER';
 export const SET_ALERT = 'SET_ALERT';
 export const CLEAR_ALERT = 'CLEAR_ALERT';
 export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
@@ -17,4 +17,6 @@ export const LOGIN_FAIL = 'LOGIN_FAIL';
 export const LOGOUT = 'LOGOUT';
 export const CONTACT_ERROR = 'CONTACT_ERROR';
 export const GET_CONTACTS = 'GET_CONTACTS';
-export const SET_LOADING = 'SET_LOADING';
+export const CLEAR_CONTACTS = 'CLEAR_CONTACTS';
+
+

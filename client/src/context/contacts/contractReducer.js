@@ -5,10 +5,10 @@ import {
     CLEAR_CURRENT,
     UPDATE_CONTACT,
     SET_FILTER,
-    CLEAT_FILTER,
+    CLEAR_FILTER,
     CONTACT_ERROR,
     GET_CONTACTS,
-    SET_LOADING
+    CLEAR_CONTACTS
 } from '../types';
 
 export default (state, action) => {
@@ -26,6 +26,7 @@ export default (state, action) => {
                 loading: false
             };
         case DELETE_CONTACT:
+            debugger
             return {
                 ...state,
                 contacts: state.contacts.filter(contact => contact._id !== action.payload)
@@ -53,7 +54,7 @@ export default (state, action) => {
                     return contact.name.match(regex) || contact.email.match(regex);
                 })
             };
-        case CLEAT_FILTER:
+        case CLEAR_FILTER:
             return {
                 ...state,
                 filtered: null
@@ -62,6 +63,14 @@ export default (state, action) => {
             return {
                 ...state,
                 error: action.payload
+            };
+        case CLEAR_CONTACTS:
+            return {
+                ...state,
+                contact: null,
+                error: null,
+                filtered: null,
+                current: null
             };
         default:
             return state
