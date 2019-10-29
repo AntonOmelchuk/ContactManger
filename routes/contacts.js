@@ -11,7 +11,8 @@ const Contact = require('../models/Contact');
 router.get('/', auth, async (req, res) => {
     try {
         const contacts = await Contact.find({user: req.user.id}).sort({date: -1});
-        res.send(contacts)
+
+        await res.json(contacts)
     } catch(err) {
         res.status(500).json({msg: 'Server error'})
     }
@@ -56,8 +57,13 @@ router.put('/', (req, res) => {
 // @desc        Delete contact
 // @access      Public
 
-router.get('/', (req, res) => {
-    res.send('Delete contacts')
+router.delete('/:id',  async (req, res) => {
+    try {
+        await Contact.findByIdAndRemove()
+        res.send('Delete contacts')
+    } catch(err) {
+
+    }
 });
 
 module.exports = router;

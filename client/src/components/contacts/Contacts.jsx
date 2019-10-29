@@ -1,29 +1,40 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
 import ContactContext from '../../context/contacts/contactContext';
 import ContactItem from "./ContactItem";
 import {CSSTransition, TransitionGroup} from 'react-transition-group';
+import Spinner from "../layouts/Spinner";
 
 const Contacts = () => {
     const contactsContext = useContext(ContactContext);
-    const {contacts, filtered} = contactsContext;
+    const {contacts, filtered, getContacts, loading} = contactsContext;
+
+    useEffect(() => {
+        getContacts();
+    //    eslint-disable-next-line
+    }, []);
+
+    if(contacts !== null && contacts.length === 0 && !loading) {
+        return <h3>No contacts, add new</h3>
+    }
 
     return (
         <>
-            <TransitionGroup>
-                {filtered !== null ? (filtered.map(contact => (
-                    <CSSTransition key={contact._id} timeout={500} classNames='item'>
-                        <ContactItem  contact={contact} />
-                    </CSSTransition>
-                    ))) :
-                    contacts !== null ?
-                    (contacts.map(contact => (
-                        <CSSTransition key={contact._id} timeout={500} classNames='item'>
-                            <ContactItem contact={contact} />
-                        </CSSTransition>
-                    ))) :
-                    <h1>No contacts</h1>
-                }
-            </TransitionGroup>
+            {contacts === null && loading ? <Spinner /> : (
+                <TransitionGroup>
+                    {filtered !== null ? filtered.map(contact => (
+                            <CSSTransition key={contact._id} timeout={500} classNames='item'>
+                                <ContactItem  contact={contact} />
+                            </CSSTransition>
+                        )) :
+                        (contacts.map(contact => (
+                            <CSSTransition key={contact._id} timeout={500} classNames='item'>
+                                <ContactItem contact={contact} />
+                            </CSSTransition>
+                        )))
+                    }
+                </TransitionGroup>
+            )}
+
         </>
     );
 };
