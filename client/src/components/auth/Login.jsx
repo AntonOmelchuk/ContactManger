@@ -1,6 +1,24 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
+import AuthContext from "../../context/auth/authContext";
+import AlertContext from "../../context/alert/alertContext";
 
-const Login = () => {
+const Login = (props) => {
+
+    const authContext = useContext(AuthContext);
+    const alertContext = useContext(AlertContext);
+    const {isAuthenticated, error, clearError, login} = authContext;
+    const {setAlert} = alertContext;
+
+    useEffect(() => {
+        if(isAuthenticated) {
+            props.history.push('/')
+        }
+        if(error === 'Invalid credentials') {
+            setAlert('danger', error)
+        }
+        clearError();
+    //    eslint-disable-next-line
+    }, [isAuthenticated, props.history, error]);
 
     const [user, setUser] = useState({
         email: '',
@@ -13,7 +31,14 @@ const Login = () => {
 
     const onSubmit = e => {
         e.preventDefault();
-        console.log('Register form')
+        if(email === '' || password === '') {
+            setAlert('danger', 'Please fill in all fields')
+        } else {
+            login({
+                email,
+                password
+            })
+        }
     };
 
     return (
@@ -31,7 +56,7 @@ const Login = () => {
                     <input type='password' name='password' value={password} onChange={onChange} />
                 </div>
                 <div className="form-group">
-                    <input type='submit'  value='Register' className='btn btn-primary btn-block' />
+                    <input type='submit'  value='Login' className='btn btn-primary btn-block' />
                 </div>
             </form>
         </div>
