@@ -4,13 +4,12 @@ import PropTypes from 'prop-types';
 
 const ContactItem = ({contact}) => {
 
-    const {id, name, email, phone, type} = contact;
-
+    const {_id, name, email, phone, type} = contact;
     const contactContext = useContext(ContactContext);
     const {deleteContact, setCurrent, clearCurrent} = contactContext;
 
-    const onDeleteContact = id => {
-        deleteContact(id);
+    const onDeleteContact = _id => {
+        deleteContact(_id);
         clearCurrent();
     };
 
@@ -34,7 +33,7 @@ const ContactItem = ({contact}) => {
             </ul>
             <p>
                 <button className="btn btn-dark btn-sm" onClick={() => setCurrent(contact)}>Edit</button>
-                <button className="btn btn-danger btn-sm" onClick={() => onDeleteContact(id)}>Delete</button>
+                <button className="btn btn-danger btn-sm" onClick={() => onDeleteContact(_id)}>Delete</button>
             </p>
         </div>
     );

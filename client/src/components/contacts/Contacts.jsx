@@ -11,15 +11,18 @@ const Contacts = () => {
         <>
             <TransitionGroup>
                 {filtered !== null ? (filtered.map(contact => (
-                    <CSSTransition key={contact.id} timeout={500} classNames='item'>
+                    <CSSTransition key={contact._id} timeout={500} classNames='item'>
                         <ContactItem  contact={contact} />
                     </CSSTransition>
                     ))) :
+                    contacts !== null ?
                     (contacts.map(contact => (
-                        <CSSTransition key={contact.id} timeout={500} classNames='item'>
+                        <CSSTransition key={contact._id} timeout={500} classNames='item'>
                             <ContactItem contact={contact} />
                         </CSSTransition>
-                    )))}
+                    ))) :
+                    <h1>No contacts</h1>
+                }
             </TransitionGroup>
         </>
     );
